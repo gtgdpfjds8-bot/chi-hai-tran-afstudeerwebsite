@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Afstudeerwebsite van Chi Hai Tran, vierdejaarsstudent Vastgoedkunde aan Hogeschool Rotterdam." />
+<title>Chi Hai Tran | Afstudeerwebsite</title>
+<style>
+  :root {
+    --ink: #15211d;
+    --muted: #62716b;
+    --paper: #f7f4ed;
+    --card: #fffdf8;
+    --line: #d9ddd3;
+    --accent: #355e4a;
+    --accent-dark: #244a38;
+    --dark: #11221b;
+    --max: 1160px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.6;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  .wrap { width: min(calc(100% - 40px), var(--max)); margin: auto; }
+  h1, h2, h3, p { margin-top: 0; }
+  h1 {
+    max-width: 850px;
+    margin: 18px 0 22px;
+    font-size: clamp(2.75rem, 6.2vw, 5.9rem);
+    line-height: .96;
+    letter-spacing: -.07em;
+  }
+  h2 {
+    margin-bottom: 18px;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    letter-spacing: -.05em;
+    line-height: 1.04;
+  }
+  h3 { margin-bottom: 8px; font-size: 1.1rem; letter-spacing: -.025em; }
+  .lead { max-width: 760px; color: #405048; font-size: clamp(1.08rem, 1.7vw, 1.28rem); }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 18px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    border-radius: 4px;
+    font-weight: 800;
+    transition: .18s ease;
+  }
+  .button:hover { background: var(--accent-dark); border-color: var(--accent-dark); transform: translateY(-2px); }
+  .button.alt { background: transparent; color: var(--ink); border-color: #aab7ae; }
+  .button.alt:hover { background: var(--card); border-color: var(--accent); }
+
+  nav {
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    backdrop-filter: blur(12px);
+    background: rgba(247, 244, 237, .9);
+    border-bottom: 1px solid rgba(217, 221, 211, .85);
+  }
+  .nav { min-height: 69px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+  .brand { font-weight: 900; letter-spacing: -.04em; line-height: 1.05; }
+  .brand small {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: .67rem;
+    font-weight: 750;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+  }
+  .links { display: flex; gap: 21px; color: #48564f; font-size: .9rem; font-weight: 700; }
+  .links a:hover { color: var(--accent); }
+
+  section { padding: 82px 0; scroll-margin-top: 84px; }
+  .hero { padding: 88px 0 60px; border-bottom: 1px solid var(--line); overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.4fr .72fr; align-items: end; gap: 46px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 29px; }
+  .availability { padding: 24px; border-left: 5px solid #93c5a0; background: var(--dark); color: #ecf4eb; }
+  .availability strong { display: block; margin-bottom: 5px; font-size: 1.05rem; }
+  .availability p { margin: 0; color: #c5d3c6; }
+
+  .video-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  .video-embed {
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--dark);
+    border: 1px solid var(--line);
+  }
+  .video-embed iframe { display: block; width: 100%; height: 100%; border: 0; }
+  .video-fallback {
+    width: fit-content;
+    margin: 0 auto;
+    color: var(--accent-dark);
+    font-size: .92rem;
+    font-weight: 750;
+    border-bottom: 1px solid currentColor;
+  }
+  .video-fallback:hover { color: var(--accent); }
+
+  .experience { background: #ebe6dc; }
+  .section-head { max-width: 760px; }
+  .timeline { margin-top: 37px; border-top: 1px solid rgba(87, 105, 94, .25); }
+  .role { display: grid; grid-template-columns: 175px 1fr; gap: 34px; padding: 28px 0; border-bottom: 1px solid rgba(87, 105, 94, .25); }
+  .role time { color: var(--accent); font-size: .86rem; font-weight: 850; letter-spacing: .04em; }
+  .role p { max-width: 720px; margin-bottom: 0; color: #46564e; }
+  .detail { margin-top: 10px; color: #6a766f !important; font-size: .92rem; }
+
+  .directions { background: #f0ece4; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .directions-head { max-width: 810px; }
+  .direction-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 34px; }
+  .direction-card { display: flex; flex-direction: column; min-height: 245px; padding: 28px; background: var(--card); border: 1px solid var(--line); }
+  .direction-card h3 { color: var(--accent-dark); font-size: 1.22rem; }
+  .direction-card ul { padding-left: 18px; margin: 14px 0 0; color: #46564e; }
+  .direction-card li + li { margin-top: 9px; }
+  .direction-note { margin: 26px 0 0; max-width: 900px; color: #59675f; font-size: .94rem; }
+
+  .grades { padding-bottom: 96px; }
+  .grade-scroll {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 12px 2px 20px;
+    margin: 26px -2px 0;
+    scroll-snap-type: x mandatory;
+    scrollbar-color: var(--accent) transparent;
+  }
+  .grade-scroll::-webkit-scrollbar { height: 8px; }
+  .grade-scroll::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 20px; }
+  .grade-card {
+    flex: 0 0 min(285px, 79vw);
+    min-height: 218px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    scroll-snap-align: start;
+    border: 1px solid var(--line);
+    background: var(--card);
+  }
+  .grade-card .subject { max-width: 210px; color: #46544d; font-size: .94rem; font-weight: 800; line-height: 1.35; }
+  .grade { color: var(--accent); font-size: 3.6rem; font-weight: 950; line-height: .9; letter-spacing: -.08em; }
+  .grade-card small { color: var(--muted); line-height: 1.38; }
+
+  .contact { background: var(--dark); color: #f5f9f3; }
+  .contact-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 45px; align-items: end; }
+  .contact .lead { color: #cbd7cc; }
+  .contact-card { padding: 28px; border: 1px solid rgba(255, 255, 255, .25); }
+  .contact-card h3 { margin-bottom: 13px; }
+  .contact-card a { display: block; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, .13); color: #e3ebe3; }
+  .contact-card a:last-child { border-bottom: 0; }
+  .linkedin-link {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2px;
+    padding: 10px 12px !important;
+    border: 1px solid rgba(255, 255, 255, .55) !important;
+    border-radius: 4px;
+    color: #fff !important;
+    font-weight: 800;
+    transition: .18s ease;
+  }
+  .linkedin-link:hover { background: rgba(255, 255, 255, .12); border-color: #fff !important; transform: translateY(-2px); }
+  .linkedin-icon { font-size: 1.05em; font-weight: 900; }
+  footer { padding: 22px 0; background: #0a1510; color: #afbaaf; font-size: .84rem; }
+
+  @media (max-width: 820px) {
+    .links { display: none; }
+    .hero-grid, .video-grid, .contact-grid, .direction-grid { grid-template-columns: 1fr; }
+    .role { grid-template-columns: 1fr; gap: 5px; }
+    .hero { padding-top: 60px; }
+    section { padding: 58px 0; }
+    .direction-card { min-height: auto; }
+  }
+</style>
+</head>
+<body>
+  <nav>
+    <div class="wrap nav">
+      <a class="brand" href="#boven">CHI HAI TRAN<small>Afstudeerwebsite · Vastgoedkunde</small></a>
+      <div class="links">
+        <a href="#video">Introductie</a>
+        <a href="#ervaring">Werk &amp; stage</a>
+        <a href="#richtingen">Richtingen</a>
+        <a href="#cijfers">Studieresultaten</a>
+        <a href="#kennismaking">Kennismaking</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="boven">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <h1>Op zoek naar een organisatie voor een praktijkgericht afstudeeronderzoek.</h1>
+          <p class="lead">Ik ben Chi Hai Tran, 24 jaar, woonachtig in Alphen aan den Rijn. Binnen vastgoed interesseren mij vooral investeringsanalyse, rendement, risico en de vraag hoe je een klant zorgvuldig helpt bij het maken van een vastgoedbeslissing.</p>
+          <div class="actions">
+            <a class="button" href="#kennismaking">Neem contact op</a>
+            <a class="button alt" href="CV_Chi_Hai_Tran.pdf" target="_blank" rel="noopener">Download cv <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+        <aside class="availability">
+          <strong>Beschikbaar vanaf oktober 2026</strong>
+          <p>Ik zoek een afstudeerorganisatie voor minimaal 20 weken. Mijn onderzoek staat centraal; ik sta open voor activiteiten die direct aansluiten op het praktijkvraagstuk en mijn leerdoelen.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="video">
+      <div class="wrap video-grid">
+        <div class="video-embed">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/JwUg5crYpKw"
+            title="Introductievideo van Chi Hai Tran"
+            loading="eager"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <a class="video-fallback" href="https://www.youtube.com/shorts/JwUg5crYpKw" target="_blank" rel="noopener noreferrer">Video niet zichtbaar? Bekijk op YouTube ↗</a>
+      </div>
+    </section>
+
+    <section class="experience" id="ervaring">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Werk &amp; stage</h2>
+          <p class="lead">Mijn ervaring heeft mij geleerd om afspraken serieus te nemen, duidelijk te communiceren en verantwoordelijkheid te dragen voor wat ik oplever.</p>
+        </div>
+        <div class="timeline">
+          <article class="role">
+            <time>2024–2025</time>
+            <div>
+              <h3>Stagiair makelaardij — Deerenberg &amp; Van Leeuwen Makelaardij</h3>
+              <p>Tijdens mijn stage deed ik ervaring op met klantcontact, bezichtigingen, taxaties en marketingactiviteiten. Hierdoor kreeg ik een beter beeld van het praktische proces rondom vastgoed en de verschillende verwachtingen van klanten.</p>
+              <p class="detail">Geleerd: commercieel denken en communiceren.</p>
+            </div>
+          </article>
+          <article class="role">
+            <time>2018–heden</time>
+            <div>
+              <h3>Medewerker nagelstudio — familiebedrijf</h3>
+              <p>Ik werk al ruim zes jaar mee in de nagelstudio van mijn ouders. Hier leerde ik verantwoordelijkheid te nemen, afspraken na te komen en open te communiceren over wat wel en niet haalbaar is voor klanten.</p>
+              <p class="detail">Geleerd: plannen, eerlijk communiceren over haalbaarheid en scenario’s afwegen. Ook ontdekte ik dat ik mijn tijd wil investeren in werk dat bij mij past en waarin ik leergierig blijf.</p>
+            </div>
+          </article>
+          <article class="role">
+            <time>Doorlopend</time>
+            <div>
+              <h3>E-commerce &amp; online marketing — eigen ontwikkeling</h3>
+              <p>In mijn vrije tijd houd ik mij bezig met e-commerce. Hierdoor heb ik meer geleerd over online marketing, klantbehoeften en de verschillende lagen van klantenverlangen.</p>
+              <p class="detail">Geleerd: prioriteiten stellen, focus houden en beter begrijpen hoe klantpsychologie, identiteit en emotie een rol spelen in aankoopbeslissingen.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="directions" id="richtingen">
+      <div class="wrap">
+        <div class="directions-head">
+          <h2>Mogelijke afstudeerrichtingen</h2>
+          <p class="lead">Onderstaande onderwerpen zijn mogelijke richtingen. De definitieve afstudeeropdracht en onderzoeksvraag formuleer ik graag samen met de organisatie, op basis van een actueel praktijkvraagstuk.</p>
+        </div>
+        <div class="direction-grid">
+          <article class="direction-card">
+            <h3>Investeringsselectie en risico-rendement</h3>
+            <ul>
+              <li>Een investeringsplan voor Britse residentiële vastgoedbeleggingen</li>
+              <li>Een beoordelingskader inclusief handleiding voor rendement, risico, cashflow en financierbaarheid van potentiële buy-to-let-objecten</li>
+              <li>Een advies voor het verbeteren van de onderbouwing en vergelijkbaarheid van investeringsbeslissingen</li>
+            </ul>
+          </article>
+          <article class="direction-card">
+            <h3>Unmortgageable vastgoed</h3>
+            <ul>
+              <li>Een haalbaarheidsadvies voor de aankoop, renovatie en verhuur of herfinanciering van unmortgageable vastgoed</li>
+              <li>Een beoordelingskader inclusief handleiding voor technische, juridische, financiële en marktrisico’s bij unmortgageable objecten</li>
+              <li>Een investeringsplan voor de aankoop en optimalisatie van unmortgageable woningen</li>
+            </ul>
+          </article>
+          <article class="direction-card">
+            <h3>Portefeuille- en risicobeheer</h3>
+            <ul>
+              <li>Een beheerplan voor een portefeuille van UK buy-to-let-vastgoed</li>
+              <li>Een portefeuille- en risicobeleid voor het monitoren van rendement, exploitatie, onderhoud, leegstand en financieringsrisico</li>
+              <li>Een advies over aanhouden, optimaliseren, herfinancieren of verkopen binnen een vastgoedportefeuille</li>
+            </ul>
+          </article>
+          <article class="direction-card">
+            <h3>Locatie- en marktselectie</h3>
+            <ul>
+              <li>Een locatie- en marktselectieadvies voor Britse residentiële vastgoedbeleggingen</li>
+              <li>Een vergelijkende analyse van kansrijke regio’s of steden voor een nader te bepalen buy-to-let-strategie</li>
+              <li>Een beoordelingskader inclusief handleiding voor locatie-, markt- en verhuurrisico’s</li>
+            </ul>
+          </article>
+          <article class="direction-card">
+            <h3>Verhuurstrategie en huurdersdoelgroepen</h3>
+            <ul>
+              <li>Een verhuurstrategie voor een afgebakend segment binnen de Britse residentiële vastgoedmarkt</li>
+              <li>Een advies voor het afstemmen van woningtype, locatie en huurdersdoelgroep op rendement, risico en beheerintensiteit</li>
+              <li>Een strategisch beleidsplan voor de keuze tussen verschillende verhuurstrategieën binnen een vastgoedportefeuille</li>
+            </ul>
+          </article>
+          <article class="direction-card">
+            <h3>Structuur en fiscaliteit van UK-vastgoedbezit</h3>
+            <ul>
+              <li>Een advies over relevante aandachtspunten bij verschillende structuren voor UK-vastgoedbezit</li>
+              <li>Een strategisch plan voor de opbouw en herinvestering binnen een UK-vastgoedportefeuille</li>
+              <li>Een vergelijkende analyse van eigendoms- en financieringsstructuren voor cashflow, risico en investeringscapaciteit</li>
+            </ul>
+          </article>
+        </div>
+        <p class="direction-note">Deze voorbeelden zijn mogelijke uitwerkingen en geen vastgestelde afstudeeropdrachten. De definitieve afbakening wordt afgestemd op de behoefte van de organisatie, beschikbare informatie en de eisen van Hogeschool Rotterdam.</p>
+      </div>
+    </section>
+
+    <section class="grades" id="cijfers">
+      <div class="wrap">
+        <h2>Studieresultaten</h2>
+        <p class="lead">Een selectie van vakken die aansluiten bij mijn interesse in vastgoedbeleggingen, financiële analyse, rendement en risico.</p>
+        <div class="grade-scroll" aria-label="Scrollbare lijst met studieresultaten">
+          <article class="grade-card"><span class="subject">Vastgoedeconomie 3</span><div class="grade">9,3</div><small>Financiële en economische vastgoedvraagstukken</small></article>
+          <article class="grade-card"><span class="subject">Bouwkunde 1</span><div class="grade">8,6</div><small>Bouwkundige basis voor object- en risicobeoordeling</small></article>
+          <article class="grade-card"><span class="subject">Prop Tech</span><div class="grade">8,5</div><small>Datagedreven innovatie binnen vastgoed</small></article>
+          <article class="grade-card"><span class="subject">Bedrijfseconomie 2</span><div class="grade">8,4</div><small>Financieel inzicht en bedrijfseconomische afwegingen</small></article>
+          <article class="grade-card"><span class="subject">Technologie II</span><div class="grade">8,1</div><small>Technische vastgoedkennis en toepassing</small></article>
+          <article class="grade-card"><span class="subject">Legal Tech</span><div class="grade">8,0</div><small>Juridische innovatie en data binnen vastgoed</small></article>
+          <article class="grade-card"><span class="subject">Stage</span><div class="grade">7,9</div><small>24 EC praktijkervaring binnen de makelaardij</small></article>
+          <article class="grade-card"><span class="subject">Inleiding vastgoed</span><div class="grade">7,7</div><small>Basiskennis van de vastgoedsector</small></article>
+          <article class="grade-card"><span class="subject">Investeringsselectie</span><div class="grade">7,6</div><small>Rendement, risico en investeringsbeslissingen</small></article>
+          <article class="grade-card"><span class="subject">Vastgoedeconomie 2</span><div class="grade">7,5</div><small>Economische analyse van vastgoed</small></article>
+          <article class="grade-card"><span class="subject">Privaatrecht</span><div class="grade">7,5</div><small>Juridische grondslagen voor vastgoedvraagstukken</small></article>
+          <article class="grade-card"><span class="subject">Project: Huisvestingsmanagement</span><div class="grade">7,7</div><small>Vastgoedbeheer en huisvestingsvraagstukken</small></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="kennismaking">
+      <div class="wrap contact-grid">
+        <div>
+          <h2 style="margin-top:18px">Afstudeerinformatie</h2>
+          <p class="lead">Ik zoek een organisatie waar ik gedurende mijn afstudeerperiode een concreet praktijkvraagstuk kan onderzoeken. De definitieve onderzoeksvraag formuleer ik graag samen met de organisatie, zodat deze aansluit op actuele uitdagingen, beschikbare informatie en de eisen van Hogeschool Rotterdam.</p>
+          <p class="lead">Ik sta daarnaast open voor activiteiten die mijn onderzoek versterken en mij helpen verder te leren van professionals uit de praktijk.</p>
+        </div>
+        <aside class="contact-card">
+          <h3>Chi Hai Tran</h3>
+          <a href="mailto:tran.ch@outlook.com">tran.ch@outlook.com</a>
+          <a href="tel:+31614606478">+31 6 1460 6478</a>
+          <a class="linkedin-link" href="https://www.linkedin.com/in/chi-hai-tran-6a9793229" target="_blank" rel="noopener noreferrer"><span class="linkedin-icon" aria-hidden="true">in</span> Bekijk mijn LinkedIn-profiel ↗</a>
+          <a href="CV_Chi_Hai_Tran.pdf" target="_blank" rel="noopener">Download cv ↗</a>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© 2026 Chi Hai Tran · Vierdejaarsstudent Vastgoedkunde, Hogeschool Rotterdam</div>
+  </footer>
+</body>
+</html>
